@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="منصة القرآن الكريم - ابدأ يومك بالقرآن والأذكار وصلواتك">
+    <meta name="theme-color" content="#065f46">
+    <title>القرآن الكريم - ابدأ يومك</title>
+    
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#065f46',
+                        }
+                    },
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-cairo bg-stone-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-primary-950 z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-pulse mb-4">
+                <i class="fas fa-quran text-6xl text-stone-100"></i>
+            </div>
+            <p class="text-stone-100 text-xl">بسم الله الرحمن الرحيم</p>
+        </div>
+    </div>
+
+    <!-- Sidebar Toggle (Mobile) -->
+    <button id="sidebar-toggle" class="fixed top-4 right-4 z-40 lg:hidden bg-primary-950 text-white p-3 rounded-lg shadow-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed right-0 top-0 h-full w-72 bg-white dark:bg-gray-800 shadow-2xl z-30 transform transition-transform duration-300 lg:translate-x-0">
+        <div class="h-full flex flex-col">
+            <!-- Logo -->
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-quran text-3xl text-primary-950 dark:text-primary-400"></i>
+                        <h1 class="text-2xl font-bold text-primary-950 dark:text-primary-400">القرآن الكريم</h1>
+                    </div>
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-moon text-gray-600 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#home" class="nav-link active flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-home text-xl"></i>
+                            <span class="font-medium">الرئيسية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#radio" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-radio text-xl"></i>
+                            <span class="font-medium">الراديو</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#surahs" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-book-quran text-xl"></i>
+                            <span class="font-medium">السور</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reciters" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-microphone text-xl"></i>
+                            <span class="font-medium">القراء</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mushaf" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-book-open text-xl"></i>
+                            <span class="font-medium">المصحف</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#azkar" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-hands-praying text-xl"></i>
+                            <span class="font-medium">الأذكار</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#duas" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-hand-holding-heart text-xl"></i>
+                            <span class="font-medium">الأدعية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#laylat-alqadr" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-star-and-crescent text-xl"></i>
+                            <span class="font-medium">ليلة القدر</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <p class="text-center text-sm text-gray-600 dark:text-gray-400">
+                    ﴿إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ﴾
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="lg:mr-72 min-h-screen pb-32">
+        <div id="page-content" class="container mx-auto px-4 py-8">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </main>
+
+    <!-- Global Audio Player (Persistent) -->
+    <div id="audio-player" class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-2xl border-t border-gray-200 dark:border-gray-700 transform translate-y-full transition-transform duration-300 z-40">
+        <div class="container mx-auto px-4 py-4">
+            <!-- Progress Bar -->
+            <div class="mb-3">
+                <div class="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+                <input type="range" id="progress-bar" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-950" min="0" max="100" value="0">
+            </div>
+
+            <!-- Player Controls -->
+            <div class="flex items-center justify-between gap-4">
+                <!-- Track Info -->
+                <div class="flex-1 min-w-0">
+                    <h3 id="track-title" class="font-semibold text-gray-900 dark:text-gray-100 truncate">لا يوجد تشغيل</h3>
+                    <p id="track-subtitle" class="text-sm text-gray-600 dark:text-gray-400 truncate">اختر سورة أو قارئ للتشغيل</p>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex items-center gap-3">
+                    <button id="prev-btn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" disabled>
+                        <i class="fas fa-step-backward text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                    <button id="play-pause-btn" class="p-4 bg-primary-950 text-white rounded-full hover:bg-primary-800 transition-colors">
+                        <i class="fas fa-play text-xl"></i>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" disabled>
+                        <i class="fas fa-step-forward text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                    <button id="playlist-btn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors hidden">
+                        <i class="fas fa-list text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                    <button id="sleep-timer-btn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-clock text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                </div>
+
+                <!-- Volume -->
+                <div class="hidden md:flex items-center gap-2">
+                    <i class="fas fa-volume-up text-gray-600 dark:text-gray-400"></i>
+                    <input type="range" id="volume-control" class="w-24 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-950" min="0" max="100" value="80">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Modal -->
+    <div id="playlist-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h2 class="text-2xl font-bold">قائمة التشغيل</h2>
+                <button id="close-playlist" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="playlist-content" class="p-6 overflow-y-auto max-h-[60vh]">
+                <!-- Playlist items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sleep Timer Modal -->
+    <div id="sleep-timer-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">مؤقت النوم</h2>
+                <button id="close-sleep-timer" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <button class="sleep-timer-option p-6 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-primary-950 dark:hover:border-primary-400 transition-colors" data-minutes="10">
+                    <div class="text-3xl font-bold text-primary-950 dark:text-primary-400">10</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">دقيقة</div>
+                </button>
+                <button class="sleep-timer-option p-6 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-primary-950 dark:hover:border-primary-400 transition-colors" data-minutes="20">
+                    <div class="text-3xl font-bold text-primary-950 dark:text-primary-400">20</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">دقيقة</div>
+                </button>
+                <button class="sleep-timer-option p-6 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-primary-950 dark:hover:border-primary-400 transition-colors" data-minutes="30">
+                    <div class="text-3xl font-bold text-primary-950 dark:text-primary-400">30</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">دقيقة</div>
+                </button>
+            </div>
+            <div id="sleep-timer-status" class="text-center text-gray-600 dark:text-gray-400 hidden">
+                <i class="fas fa-clock text-2xl mb-2"></i>
+                <p>سيتوقف التشغيل بعد <span id="remaining-time" class="font-bold text-primary-950 dark:text-primary-400"></span></p>
+                <button id="cancel-sleep-timer" class="mt-4 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                    إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">مشاركة</h2>
+                <button id="close-share" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="share-content" class="mb-6">
+                <p id="share-text" class="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg"></p>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <button id="share-whatsapp" class="p-4 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors">
+                    <i class="fab fa-whatsapp text-2xl mb-2"></i>
+                    <div class="text-xs">واتساب</div>
+                </button>
+                <button id="share-facebook" class="p-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
+                    <i class="fab fa-facebook text-2xl mb-2"></i>
+                    <div class="text-xs">فيسبوك</div>
+                </button>
+                <button id="share-twitter" class="p-4 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition-colors">
+                    <i class="fab fa-twitter text-2xl mb-2"></i>
+                    <div class="text-xs">تويتر</div>
+                </button>
+            </div>
+            <button id="copy-link" class="w-full mt-4 px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                <i class="fas fa-copy ml-2"></i>
+                نسخ الرابط
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="audio-element" preload="metadata"></audio>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/performance.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/pages/radio.js"></script>
+    <script src="js/pages/surahs.js"></script>
+    <script src="js/pages/surah-detail.js"></script>
+    <script src="js/pages/ayah-detail.js"></script>
+    <script src="js/pages/reciters.js"></script>
+    <script src="js/pages/reciter-detail.js"></script>
+    <script src="js/pages/mushaf.js"></script>
+    <script src="js/pages/azkar.js"></script>
+    <script src="js/pages/duas.js"></script>
+    <script src="js/pages/laylat-alqadr.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
